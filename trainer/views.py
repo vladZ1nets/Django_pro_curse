@@ -1,15 +1,24 @@
+<<<<<<< HEAD
 from django.contrib.auth.models import User, Group
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseForbidden
+=======
+from django.shortcuts import render
+from django.http import HttpResponse
+>>>>>>> f3f8c0c9420f13ab02e6dba2204770ae42a343c7
 
 import trainer.models
 
 # Create your views here.
+<<<<<<< HEAD
 
+=======
+>>>>>>> f3f8c0c9420f13ab02e6dba2204770ae42a343c7
 def category_page(request):
     return HttpResponse("Hello, world. You're at the polls index.")
 
 def trainer_page(request, trainer_id):
+<<<<<<< HEAD
     if request.user.groups.filter(name='Trainer').exists():
         if request.method == "GET":
             service_categories = trainer.models.Category.objects.all()
@@ -24,11 +33,21 @@ def trainer_page(request, trainer_id):
         trainer_schedule = trainer.models.TrainerSchedule.objects.filter(trainer=trainer_model)
 
         return render(request, 'account.html', context={'trainer_data': trainer_data, "trainer_schedule": trainer_schedule})
+=======
+    if request.method == "GET":
+        service_categories = trainer.models.Category.objects.all()
+
+        my_services = trainer.models.Service.objects.filter(trainer=request.user).all()
+
+        return render(request,"trainer.html", {"categories": service_categories, "services": my_services}) # форма з додаванням сервісу
+    return HttpResponse("Hello, world. You're at the polls index.")
+>>>>>>> f3f8c0c9420f13ab02e6dba2204770ae42a343c7
 
 def trainer_service_page(request, user_id, service_id):
     return HttpResponse("Hello, world. You're at the polls index.")
 
 def service_page(request):
+<<<<<<< HEAD
     if request.method == "GET":
         services=trainer.Service.objects.all()
         return render(request, "services.html", context={"services":services})
@@ -66,3 +85,21 @@ def trainer_registration(request):
         user.groups.add(trainer_group)
         user.save()
         return HttpResponse("Hello, world. You're at the polls index.")
+=======
+    if request.method == "POST":
+        form_data = request.POST
+        service_cat = trainer.models.Category.objects.get(pk=form_data["category"])
+        service = trainer.models.Service(
+          level = form_data["level"],
+          duration = form_data["duration"],
+          price = form_data["price"],
+          category = service_cat,
+          trainer = request.user,
+        )
+        service.save()
+
+    return HttpResponse("Hello, world. You're at the polls index.")
+
+def booking_for_user(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+>>>>>>> f3f8c0c9420f13ab02e6dba2204770ae42a343c7
