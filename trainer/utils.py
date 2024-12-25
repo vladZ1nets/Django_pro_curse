@@ -3,7 +3,7 @@ from datetime import timedelta
 from booking.models import Booking
 from trainer.models import TrainerSchedule, Service
 
-# Заміна моделей Django на прості класи для тестування
+# Заміна моделей джанго на прості класи для тестування
 class TrainerSchedule:
     def __init__(self, trainer_id, datetime_start, datetime_end):
         self.trainer_id = trainer_id
