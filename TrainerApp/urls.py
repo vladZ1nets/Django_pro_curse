@@ -26,10 +26,7 @@ urlpatterns = [
     path("login/", users.views.login_page, name="user_login"),
     path("logout/", users.views.logout_page, name="user_logout"),
     path("register/", users.views.register_page, name="user_register"),
-<<<<<<< HEAD
     path("register/trainer/", trainer.views.trainer_registration, name="trainer_registration"),
-=======
->>>>>>> f3f8c0c9420f13ab02e6dba2204770ae42a343c7
     path("trainer/", include("trainer.urls")),
     path("category/", trainer.views.category_page, name="trainer_category"),
     path("service/", trainer.views.service_page, name="trainer_service"),
